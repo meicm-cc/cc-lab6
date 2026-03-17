@@ -42,6 +42,7 @@ Inside the `/api` directory, create an optimized **Multi-Stage `Dockerfile`** fo
 Now that your containers can be built, you must orchestrate the ecosystem and design the network topology. 
 
 Start with the `docker-compose.yml` file that is present in the root directory. You must define **three** more services along the API Gateway (`jc21/nginx-proxy-manager:latest` image): the frontend, the API and the Redis cache.
+
 **Tip:** use build: ./frontend and build: ./api to specify Dockerfiles' locations.
 
 **Focus on Docker Networking:**
