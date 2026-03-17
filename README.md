@@ -52,3 +52,23 @@ In a Compose environment, Docker automatically creates a custom bridge network f
 Once your YAML file is complete, boot the architecture in dettached mode:
 ```bash
 docker compose up -d --build
+```
+
+### Phase 4: Configure the Edge Router
+Now that all services are running, we should configure the different services that will be proxied through NPM.
+
+1. Open your browser and log into the NPM Admin UI at `http://localhost:81`.
+2. Configure the frontend service with the domain: app.meicm.pt
+3. **Remember:** proxy is in the same network as the other containers, so it can resolve their hostnames.
+4. Define port number and add the host.
+5. Repeat these steps for the API service
+	5.1. Use the domain api.meicm.pt
+
+### Phase 5: Validation
+Open the web browser at http://app.meicm.pt
+Test every functionality and make sure that frontend, API and Redis are working properly.
+
+### Phase 6: Homework: Create Your Own Domain + SSL
+As an extra exercise, the challenge is to create your own domain and generate SSL certificates to serve the application as HTTPS.
+**Suggestion:** use duckdns.org for free domains/sub-domains. It also provides DNS challenge token to generate Let's Encrypt certificates.
+
