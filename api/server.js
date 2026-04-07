@@ -28,6 +28,8 @@ const s3 = new S3Client({
 
 const BUCKET_NAME = 'profile-pictures';
 
+var retries = process.env.DATABASE_CONNECTION_RETRIES || 5;
+
 const initDB = async () => {
     try {
         await pool.query(`
@@ -40,6 +42,17 @@ const initDB = async () => {
         console.log("PostgreSQL Table 'users' initialized.");
     } catch (err) {
         console.error("DB Init Error:", err);
+        retries--;
+        if (retries <= 0) {
+            process.exit(1);
+        }
+        
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, 5000);
+        });
+        initDB();
     }
 };
 initDB();
