@@ -1,0 +1,30 @@
+services:
+  frontend:
+    build: ./frontend
+  api:
+    build: ./api
+    depends_on:
+      - postgres-db
+  proxy-manager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./data/npm:/data
+      - ./data/letsencrypt:/etc/letsencrypt
+  postgres-db:
+    image: postgres:alpine
+    volumes:
+      - ./db-data:/var/lib/postgresql/18/docker
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=postgres-db
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_DB=cloud_db
+  minio:
+    image: minio/minio:RELEASE.2025-01-20T14-49-07Z
+    volumes:
+      - ./minio-data:/data
+    command: server /data --console-address ":9001"
