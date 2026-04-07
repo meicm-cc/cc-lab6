@@ -1,8 +1,8 @@
 services:
   frontend:
-    build: ./frontend
+    image: ghcr.io/joaoramosipl/cloud-frontend:latest
   api:
-    build: ./api
+    image: ghcr.io/joaoramosipl/cloud-api:latest
     depends_on:
       - postgres-db
   proxy-manager:
