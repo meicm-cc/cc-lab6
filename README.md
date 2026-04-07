@@ -56,7 +56,7 @@ The API may still struggle to connect to the database depending on the boot sequ
 1. Edit `docker-compose.yml` so the database service has a health check that confirms PostgreSQL is actually ready to accept connections.
 ```yaml
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d cloud_db"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
