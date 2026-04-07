@@ -4,7 +4,9 @@ services:
   api:
     image: ghcr.io/joaoramosipl/cloud-api:latest
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_healthy
+        
   proxy-manager:
     image: 'jc21/nginx-proxy-manager:latest'
     ports:
