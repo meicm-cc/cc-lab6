@@ -1,3 +1,7 @@
+data
+db-data
+minio-data
+
 # Created by https://www.toptal.com/developers/gitignore/api/node,macos,visualstudiocode,powershell,linux
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,macos,visualstudiocode,powershell,linux
 
