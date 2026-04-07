@@ -23,6 +23,11 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_HOST_AUTH_METHOD=trust
       - POSTGRES_DB=cloud_db
+    healthcheck:
+      test: ["CMD_SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   minio:
     image: minio/minio:RELEASE.2025-01-20T14-49-07Z
     volumes:
